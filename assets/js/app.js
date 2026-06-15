@@ -233,15 +233,26 @@ function onEdit(ele){
        xhr.onload =function(){ 
           if(xhr.status>=200 && xhr.status<=299){ 
              let col= document.getElementById(updateId); 
-                 let h3 = col.querySelector('.card-header h3');
-                         h3.innerText = updatedObj.title;
-             
-                 let p = col.querySelector('.card-body p');
-                         p.innerText = updatedObj.body;  
-               
+                  col.innerHTML= `
+                  <div class="card h-100 " >
+                      <div class="card-header">
+                      <h3>
+                       ${updatedObj.title}
+                       </h3>
+                     </div>
+                    <div class="card-body">
+                      <p>
+                        ${updatedObj.body}
+                     </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between align-items-center">
+                           <button onclick="onEdit(this)" class="btn btn-inline-block btn-outline-primary ">Edit</button>
+                           <button onclick="onRemove(this)" class="btn btn-inline-block btn-outline-danger ">Delete</button>
+                    </div>
+                </div>`
                    addPost.classList.add('d-none')
                   updatePost.classList.remove("d-none")
-                  
+                    postForm.reset();
               snackbar('Data updated successfully', 'success');
                   
                          
